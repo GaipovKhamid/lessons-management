@@ -1,34 +1,19 @@
-package com.khamid.spring_exercises.entity;
+package com.khamid.spring_exercises.dto;
 
 import com.khamid.spring_exercises.enums.Gender;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "brovla")
-public class StudentEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class StudentDTO {
     private Integer id;
-
-    @Column
     private String name;
-
-    @Column
     private String surname;
-
-    @Column
     private Integer level;
-
-    @Column
     private Integer age;
-
-    @Enumerated(EnumType.STRING)
-    @Column
     private Gender gender;
-
-    @Column
     private LocalDateTime createdDate;
 
     public Integer getId() {
