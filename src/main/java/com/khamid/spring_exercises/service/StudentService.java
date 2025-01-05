@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -29,6 +30,7 @@ public class StudentService {
         repository.save(studentEntity); //
 
         studentDTO.setId(studentEntity.getId());
+        studentDTO.setCreatedDate(LocalDateTime.now());
         return studentDTO;
     }
 
@@ -39,6 +41,34 @@ public class StudentService {
             list.add(toDto(entity));
         }
         return list;
+    }
+
+    //by id
+    public StudentDTO getById(Integer id) {
+        Optional<StudentEntity> optional = repository.findById(id);
+        if (optional.isEmpty()) {
+            return null;
+        }
+        StudentEntity entity = optional.get();
+        return toDto(entity);
+    }
+
+    //update
+    public StudentDTO update(Integer id, StudentDTO dto) {
+        Optional<StudentEntity> optional = repository.findById(id);
+        if (optional.isEmpty()) {
+            return null;
+        }
+        StudentEntity entity = optional.get();
+        toDto(entity);
+        repository.save(entity);
+
+        return dto;
+    }
+
+    //delete by id
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 
     public StudentDTO toDto(StudentEntity entity) {
