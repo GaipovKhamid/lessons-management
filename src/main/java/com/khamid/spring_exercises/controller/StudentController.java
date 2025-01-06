@@ -2,6 +2,7 @@ package com.khamid.spring_exercises.controller;
 
 
 import com.khamid.spring_exercises.dto.StudentDTO;
+import com.khamid.spring_exercises.enums.Gender;
 import com.khamid.spring_exercises.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,16 +32,43 @@ public class StudentController {
     }
 
     @PutMapping("/update/{id}")
-    private ResponseEntity<StudentDTO> update(@PathVariable("id") Integer id, @RequestParam StudentDTO dto){
-        StudentDTO result = service.update(id,dto);
+    private ResponseEntity<StudentDTO> update(@PathVariable("id") Integer id, @RequestParam StudentDTO dto) {
+        StudentDTO result = service.update(id, dto);
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity<StudentDTO> delete(@PathVariable("id") Integer id){
+    private ResponseEntity<StudentDTO> delete(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/getByName/{name}")
+    private ResponseEntity<List<StudentDTO>> getByName(@PathVariable("name") String name) {
+        return ResponseEntity.ok(service.getByName(name));
+    }
+
+    @GetMapping("/getBySurname/{surname}")
+    private ResponseEntity<List<StudentDTO>> getBySurname(@PathVariable("surname") String name) {
+        return ResponseEntity.ok(service.getBySurname(name));
+    }
+
+    @GetMapping("/getByAge/{age}")
+    private ResponseEntity<List<StudentDTO>> getByAge(@PathVariable("age") Integer age) {
+        return ResponseEntity.ok(service.getByAge(age));
+    }
+
+    @GetMapping("/getByLevel/{level}")
+    private ResponseEntity<List<StudentDTO>> getBylevel(@PathVariable("level") Integer level) {
+        return ResponseEntity.ok(service.getByLevel(level));
+    }
+
+    @GetMapping("/getByGender/{gender}")
+    private ResponseEntity<List<StudentDTO>> getBygender(@PathVariable("gender") Gender gender) {
+        return ResponseEntity.ok(service.getByGender(gender));
+    }
+
+    @GetMapping("/byDateTime/{min}b")
 
 
 }
