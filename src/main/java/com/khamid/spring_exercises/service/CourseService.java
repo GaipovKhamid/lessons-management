@@ -64,12 +64,39 @@ public class CourseService {
         return toDto(courseEntity);
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         courseRepository.deleteById(id);
     }
 
-    public void kill(){
+    public void kill() {
         courseRepository.deleteAll();
+    }
+
+    public List<CourseDTO> getByName(String name) {
+        List<CourseEntity> entityList = courseRepository.getByName(name);
+        List<CourseDTO> list = new LinkedList<>();
+        for (CourseEntity entity : entityList) {
+            list.add(toDto(entity));
+        }
+        return list;
+    }
+
+    public List<CourseDTO> getByPrice(Double price) {
+        List<CourseEntity> entityList =  courseRepository.getByPrice(price);
+        List<CourseDTO> list = new LinkedList<>();
+        for (CourseEntity entity : entityList) {
+            list.add(toDto(entity));
+        }
+        return list;
+    }
+
+    public List<CourseDTO> getByDuration(Integer duration) {
+        List<CourseEntity> entityList = courseRepository.getByDuration(duration);
+        List<CourseDTO> list = new LinkedList<>();
+        for (CourseEntity entity : entityList) {
+            list.add(toDto(entity));
+        }
+        return list;
     }
 
     public CourseDTO toDto(CourseEntity entity) {

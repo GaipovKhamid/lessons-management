@@ -45,4 +45,19 @@ public class CourseController {
         courseService.kill();
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/byName")
+    public ResponseEntity<List<CourseDTO>> getByName(@RequestParam String name){
+        return ResponseEntity.ok(courseService.getByName(name));
+    }
+
+    @GetMapping("/byPrice")
+    public ResponseEntity<List<CourseDTO>> getByPrice(@RequestParam Double price){
+        return ResponseEntity.ok(courseService.getByPrice(price));
+    }
+
+    @GetMapping("/byDuration")
+    public ResponseEntity<List<CourseDTO>> getByDuration(@RequestParam Integer duration){
+        return ResponseEntity.ok(courseService.getByDuration(duration));
+    }
 }
