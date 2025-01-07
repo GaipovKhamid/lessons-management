@@ -124,9 +124,9 @@ public class StudentService {
         LocalDateTime from = LocalDateTime.of(givenDate, LocalTime.MIN);
         LocalDateTime to = LocalDateTime.of(givenDate, LocalTime.MAX);
 
-        List<StudentEntity> entityList = repository.findByCreatedDate_Date(givenDate);
+        Iterable<StudentEntity> iterable = repository.findByCreatedDateBetween(from, to);
         List<StudentDTO> list = new LinkedList<>();
-        for (StudentEntity entity : entityList) {
+        for (StudentEntity entity: iterable){
             list.add(toDto(entity));
         }
         return list;
